@@ -94,7 +94,7 @@ function drawScore() {
   }
   
   function draw() {
-  
+     drawBricks();
      drawScore();
      drawLives();
      drawLevel();
