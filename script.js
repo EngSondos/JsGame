@@ -36,11 +36,6 @@ for(var r=0; r<brickRowCount; r++) {
 
 
 
-const gradient = ctx.createLinearGradient(5, 10, 50, 250);
-gradient.addColorStop(0, "pink");
-gradient.addColorStop(1, "white");
-
-
 function drawBricks() {
   for(var c=0; c<  brickRowCount ; c++) {
     for(var r=0; r<brickColumnCount; r++) {
