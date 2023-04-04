@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,8 +8,16 @@
     <title>Js Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <canvas></canvas>
+    <div class="adjust-gameover-and-canvas-dimensions" id="gameover">
+        <img src="imgs/gover.png" alt="Game Over" id="youlost">
+        <img src="imgs/uwon.png" alt="You Won" id="youwon">
+        <p id="playagain">Play Again!</p>
+    </div>
+    <canvas class="adjust-gameover-and-canvas-dimensions"> </canvas>
+
     <script src="script.js"></script>
 </body>
+
 </html>
