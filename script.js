@@ -29,15 +29,15 @@ imgb2.src = "b2.PNG"
 var bricks = [];
 for(var c=0; c<brickColumnCount; c++) {
   bricks[c] = [];
-  for(var r=0; c<  brickRowCount ; r++) {
-    bricks[r][c] = { x: 0, y: 0, status: 1,hitCount:0 };
+  for(var r=0; r< brickRowCount ; r++) {
+    bricks[c][r] = { x: 0, y: 0, status: 1,hitCount:0 };
   }
 }
 
 
 
 function drawBricks() {
-  for(var c=0; c<  brickColumnCount ; c++) {
+  for(var c=0; c< brickColumnCount ; c++) {
     for(var r=0; r<brickRowCount; r++) {
       if(bricks[c][r].status == 1) {
         var brickX = (r*(brickWidth+brickPadding))+brickOffsetLeft;
