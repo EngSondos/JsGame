@@ -16,13 +16,15 @@ let context = canvas.getContext('2d')
 
     // Draw Paddle
     function drawpaddle(){
-
+        context.beginPath
         context.fillStyle = '#5900b3';
-        context.fillRect(paddle.x ,paddle.y ,paddle.w ,paddle.h); 
+        context.rect(paddle.x ,paddle.y ,paddle.w ,paddle.h); 
         
         context.strokeStyle = '#b30000';
         context.strokeRect(paddle.x , paddle.y ,paddle.w ,paddle.h);
+        context.closePath;
     }
+
 
     // Move paddle //
    
