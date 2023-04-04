@@ -2,7 +2,7 @@ let canvas = document.getElementsByTagName('canvas')[0]
 let context = canvas.getContext('2d')
 
 var brickRowCount = 3;
-var brickColumnCount = 5;
+var brickColumnCount = 6;
 var brickWidth = 75;
 var brickHeight = 50;
 var brickPadding = 10;
@@ -27,9 +27,9 @@ imgb2.src = "b2.PNG"
 
 
 var bricks = [];
-for(var c=0; c<brickColumnCount; c++) {
+for(var c=0; c< brickColumnCount; c++) {
   bricks[c] = [];
-  for(var r=0; r< brickRowCount ; r++) {
+  for(var r=0; r< brickRowCount; r++) {
     bricks[c][r] = { x: 0, y: 0, status: 1,hitCount:0 };
   }
 }
@@ -37,7 +37,7 @@ for(var c=0; c<brickColumnCount; c++) {
 
 
 function drawBricks() {
-  for(var c=0; c< brickColumnCount ; c++) {
+  for(var c=0; c< brickColumnCount; c++) {
     for(var r=0; r<brickRowCount; r++) {
       if(bricks[c][r].status == 1) {
         var brickX = (r*(brickWidth+brickPadding))+brickOffsetLeft;
