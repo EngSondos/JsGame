@@ -62,11 +62,11 @@ function draw (){
     collisionDetection()
 }
 
-const IMG = new Image();
-IMG.src ="html-color-codes-color-tutorials.jpg";
+// const IMG = new Image();
+// IMG.src ="html-color-codes-color-tutorials.jpg";
 
 //add border
-cvs.style.border = "1px solid black"
+canvas.style.border = "1px solid black"
 
 // creat the ball
  const BALL_RADIUS= 15;
@@ -107,12 +107,15 @@ function clashWall(){
 // };
 
 function final(){
+
    drawball(); 
    movingball();
    clashWall();
+   collisionDetection()
+
    
 }
-// final();
+final();
 function loop(){
     context.drawImage(IMG, 0, 0);
     final();
