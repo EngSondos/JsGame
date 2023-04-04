@@ -1,9 +1,42 @@
-canvas
-{
+.adjust-gameover-and-canvas-dimensions {
     width: 70%;
-    height: 50hv;
-    border: 1px solid saddlebrown;
-    margin: auto;
+    height: 50vh;
+    margin: 2% 15%;
+    position: absolute;
+}
+
+canvas {
+    outline: 1px solid saddlebrown;
     display: block;
-    margin-top: 2%;
+}
+
+#gameover {
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(31, 148, 31, .5);
+    display: none;
+
+}
+
+#youwon,
+#youlost {
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 200px;
+    position: absolute;
+    display: none;
+}
+
+#playagain {
+    position: absolute;
+    top: 27vh;
+    font-size: 2em;
+    font-weight: 700;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: white;
+    text-shadow: 1.25px 1.25px;
+    cursor: pointer;
+    z-index: 2;
+    display: none;
 }
