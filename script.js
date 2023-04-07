@@ -174,31 +174,31 @@ for(var r=0; r< brickRowCount; r++) {
 
 
 function drawBricks() {
-    for(var r=0; r<  brickRowCount; r++) {
-      for(var c=0; c<brickColumnCount; c++) {
-        if(bricks[r][c].status == 1) {
-          var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
-          var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
-          bricks[r][c].x = brickX;
-          bricks[r][c].y = brickY;
-          ctx.beginPath();
-          ctx.drawImage(imgb,brickX, brickY, brickWidth, brickHeight)
-  
-          if(bricks[r][c].hitCount == 0){
-          ctx.drawImage(imgb,brickX, brickY, brickWidth, brickHeight)
-  
-  
-          }else if (bricks[r][c].hitCount == 1){
-            ctx.drawImage(imgb2,brickX, brickY, brickWidth, brickHeight)
-            
-  
-          }
-          ctx.fill();
-          ctx.closePath();
+  for(var r=0; r<  brickRowCount; r++) {
+    for(var c=0; c<brickColumnCount; c++) {
+      if(bricks[r][c].status == 1) {
+        var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
+        var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
+        bricks[r][c].x = brickX;
+        bricks[r][c].y = brickY;
+        ctx.beginPath();
+        ctx.drawImage(imgb,brickX, brickY, brickWidth, brickHeight)
+
+        if(bricks[r][c].hitCount == 0){
+        ctx.drawImage(imgb,brickX, brickY, brickWidth, brickHeight)
+
+
+        }else if (bricks[r][c].hitCount == 1){
+          ctx.drawImage(imgb2,brickX, brickY, brickWidth, brickHeight)
+          
+
         }
+        ctx.fill();
+        ctx.closePath();
       }
     }
   }
+}
 
 
 
