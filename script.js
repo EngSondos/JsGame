@@ -152,31 +152,31 @@ imgb2.src = "b2.PNG"
 
 
 var bricks = [];
-for(var c=0; c< brickColumnCount; c++) {
-  bricks[c] = [];
-  for(var r=0; r< brickRowCount; r++) {
-    bricks[c][r] = { x: 0, y: 0, status: 1,hitCount:0 };
+for(var r=0; r< brickRowCount; r++) {
+  bricks[r] = [];
+  for(var c=0; c< brickColumnCount; c++) {
+    bricks[r][c] = { x: 0, y: 0, status: 1,hitCount:0 };
   }
 }
 
 
 
 function drawBricks() {
-  for(var c=0; c< brickColumnCount; c++) {
-    for(var r=0; r<brickRowCount; r++) {
-      if(bricks[c][r].status == 1) {
-        var brickX = (r*(brickWidth+brickPadding))+brickOffsetLeft;
-        var brickY = (c*(brickHeight+brickPadding))+brickOffsetTop;
-        bricks[c][r].x = brickX;
-        bricks[c][r].y = brickY;
+  for(var r=0; r<  brickRowCount; r++) {
+    for(var c=0; c<brickColumnCount; c++) {
+      if(bricks[r][c].status == 1) {
+        var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
+        var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
+        bricks[r][c].x = brickX;
+        bricks[r][c].y = brickY;
         ctx.beginPath();
         ctx.drawImage(imgb,brickX, brickY, brickWidth, brickHeight)
 
-        if(bricks[c][r].hitCount == 0){
+        if(bricks[r][c].hitCount == 0){
         ctx.drawImage(imgb,brickX, brickY, brickWidth, brickHeight)
 
 
-        }else if (bricks[c][r].hitCount == 1){
+        }else if (bricks[r][c].hitCount == 1){
           ctx.drawImage(imgb2,brickX, brickY, brickWidth, brickHeight)
           
 
