@@ -8,6 +8,8 @@
 canvas {
     outline: 1px solid saddlebrown;
     display: block;
+    width: 600px;
+    height: 400px;
 }
 
 #gameover {
