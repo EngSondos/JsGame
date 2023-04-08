@@ -2,12 +2,12 @@ let canvas = document.getElementsByTagName('canvas')[0]
 let context = canvas.getContext('2d')
 
     // create paddle //
-    const paddle_Width = 55;
-    const paddle_height =7;
-    const paddle_Margin_Bottom = 10;
+    const paddle_Width = 150;
+    const paddle_height =20;
+    const paddle_Margin_Bottom = 30;
     var paddleX = (canvas.width-paddle_Width)/2;
     let paddle ={
-        x : canvas.width/2 - paddle_Width/2,
+        x : canvas.width/2 - paddle_Width/2, // middle of canvas 
         y : canvas.height - paddle_height - paddle_Margin_Bottom,
         w : paddle_Width,
         h : paddle_height,
@@ -16,13 +16,16 @@ let context = canvas.getContext('2d')
 
     // Draw Paddle
     function drawpaddle(){
-        context.beginPath
+        context.beginPath();
+        context.rect(paddle.x ,paddle.y ,paddle.w ,paddle.h);
         context.fillStyle = '#5900b3';
-        context.rect(paddle.x ,paddle.y ,paddle.w ,paddle.h); 
-        
+        context.fill();
+    
         context.strokeStyle = '#b30000';
-        context.strokeRect(paddle.x , paddle.y ,paddle.w ,paddle.h);
+        context.stroke();
+
         context.closePath;
+        
     }
 
 
@@ -30,7 +33,7 @@ let context = canvas.getContext('2d')
    
     let rightArrow = false ; 
     let leftArrow = false;
-
+    // control paddle with keyboard
    document.addEventListener("keydown", function (e){
     if(e.code === "ArrowRight" ){
             rightArrow = true;
@@ -50,6 +53,22 @@ let context = canvas.getContext('2d')
        }
      }
     );
+
+
+  
+   // control with Mouse
+    document.addEventListener('mousemove',function(e){
+        // mouse position //
+        let relativeX = e.clientX - canvas.offsetLeft ;  
+        // if mouse inside canvas
+        if( 
+            relativeX > paddle_Width / 2 &&
+            relativeX + paddle_Width / 2 < canvas.width
+        ){
+            paddle.x = relativeX -paddle_Width /2 ;
+        }
+       
+    }) ;
      
     function movePaddle() {
         // for paddle move inside canvas 
@@ -71,3 +90,5 @@ let context = canvas.getContext('2d')
         requestAnimationFrame(loop);
     }
 loop(); 
+
+
