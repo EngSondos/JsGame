@@ -11,7 +11,6 @@ let paddle = {
     h: paddle_height,
     dx: 5   // speed for paddle x axis
 };
-var paddleX = (canvas.width - paddle_Width) / 2;
 
 // creat the ball
 const BALL_RADIUS = 8;
@@ -26,11 +25,10 @@ const ball = {
 }
 const MAX_LEVELS = 3
 
-// let animation = "";
 var brickRowCount = 2;
-var brickColumnCount = 5;
+var brickColumnCount = 6;
 var brickWidth = 70;
-var brickHeight = 60;
+var brickHeight = 60
 var brickPadding = 10;
 var brickOffsetTop = 50;
 var brickOffsetLeft = 30;
@@ -41,7 +39,6 @@ let playAgain = document.getElementById('playagain');
 var score = 0;
 var lives = 3;
 var level = 1;
-let isLevelUp = true
 let game=false
 
 function drawball() {
@@ -59,46 +56,44 @@ function movingball() {
     ball.x += ball.dx;
     ball.y += ball.dy;
 }
+function initBallAndPaddle()
+{
+    ball.x = canvas.width/2;
+    ball.y = canvas.height-30;
+    ball.dx = 2;
+    ball.dy = -2;
+    paddle.x =  (canvas.width - paddle_Width) / 2;
+}
+function losingLives() {
+       
+    if(ball.x > paddle.x && ball.x < paddle.x + paddle_Width)
+    {
+        ball.dy =-ball.dy
+    } else {
+        lives--;
+       
+        if (!lives){
+            game=true
+            gameLostFun()
+        }else{
+           initBallAndPaddle()
+        }
+    }
+}
 
 function clashWall() {
 
-    if (ball.x + ball.dx > canvas.width-ball.radius || ball.x +ball.dx - ball.radius < 0) {
+    if(ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0){
         ball.dx = - ball.dx;
     }
-    if (ball.y +ball.dy - ball.radius < 0) {
+    if(ball.y - ball.radius < 0){
         ball.dy = - ball.dy;
     }
-    else if(ball.y + ball.dy > canvas.height-ball.radius) {
-    
-        if(ball.x > paddleX && ball.x < paddleX + paddle_Width)
-        {
-            ball.dy =-ball.dy
-        } else {
-            lives--;
-           
-            if (!lives){
-                game=true
-                gameLostFun()
-            }else{
-                ball.x = canvas.width/2;
-                ball.y = canvas.height-30;
-                ball.dx = 2;
-                ball.dy = -2;
-                paddleX =  (canvas.width - paddle_Width) / 2;
-            }
-        }
-    
+    else if(ball.y + ball.dy +paddle_height> canvas.height-ball.radius) {  
+        losingLives()
 }
 }
 
-// function losingLives() {
-       
-// }
-
-// function ballPaddle()
-// {
-//     if()
-// }
 
 // create paddle //
 
@@ -151,13 +146,14 @@ function movePaddle() {
 }
 
 var bricks = [];
+function initBrick(){
 for (var r = 0; r < brickRowCount; r++) {
     bricks[r] = [];
     for (var c = 0; c < brickColumnCount; c++) {
         bricks[r][c] = { x: 0, y: 0, status: 1, hitCount: 0 };
     }
 }
-
+}
 
 
 function drawBricks() {
@@ -191,7 +187,7 @@ function drawBricks() {
 
 function drawScore() {
     context.font = "18px Lilita One";
-    context.fillStyle = "#FFFFFF";
+    context.fillStyle = "#000000";
 
     context.drawImage(img, 27, 5, 20, 20);
     context.fillText("Score: " + score, 53, 20);
@@ -225,6 +221,8 @@ function gameWonFun() {
     gameOver.style.display = "flex";
     youWon.style.display = "block";
     playAgain.style.display = "block"
+    canvas.style.display="none"
+
 }
 function gameLostFun() {
     gameOver.style.backgroundColor = "rgba(0, 0, 0, .5)"
@@ -236,26 +234,6 @@ function gameLostFun() {
 
 }
 
-// function levelUP() {
-//     for (var c = 0; c < brickColumnCount; r++) {
-//         for (var r = 0; r < brickRowCount; r++) {
-//             isLevelUp = isLevelUp && !bricks[c][r].status
-//         }
-//     }
-//     if (isLevelUp) {
-//         if (level > MAX_LEVELS) {
-//             //show When win screen
-//         }
-//         dx = 3
-//         dy = -3
-
-//         brickRowCount++
-//         drawBricks()
-//         level++
-//     }
-
-
-// }
 function collisionDetection() {
     for (var r = 0; r < brickRowCount; r++) {
         for (var c = 0; c < brickColumnCount; c++) {
@@ -271,14 +249,17 @@ function collisionDetection() {
                         b.status = 0
 
                     if (score == 2 * brickRowCount * brickColumnCount) {
-                        // console.log(level)
+                        level++
                         if (level > MAX_LEVELS) {
-                            //screen to win 
-                            // gameWonFun()
-                        }
-                        else {
-
-                            // levelUP()
+                            gameWonFun()
+                            game=true
+                            
+                        }else {
+                            brickRowCount++
+                            initBrick()
+                            initBallAndPaddle()
+                            drawBricks()
+                            score =0
 
                         }
 
@@ -328,5 +309,5 @@ if(!game){
    requestAnimationFrame(loop);
 }
 }   
-
+initBrick()
 loop()
