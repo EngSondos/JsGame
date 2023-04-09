@@ -32,9 +32,13 @@ var brickHeight = 60
 var brickPadding = 10;
 var brickOffsetTop = 50;
 var brickOffsetLeft = 30;
+
+let gameStart = document.getElementById('game-interface');
+let gameStartImage = document.getElementById('gstart-img');
+let startGameBtn = document.getElementById('play-now')
 let gameOver = document.getElementById('gameover');
-let youLost = document.getElementById('youlost');
-let youWon = document.getElementById('youwon');
+let youLost = document.getElementById('gover-img');
+let youWon = document.getElementById('uwon-img');
 let playAgain = document.getElementById('playagain');
 var score = 0;
 var lives = 3;
@@ -212,10 +216,30 @@ function drawLevel() {
 
     context.fillText(level, canvas.width - 230, 20);
 }
+let clicked = false;
+
+startGameBtn.addEventListener('click', function () {
+    clicked = true;
+    gameStartFun();
+})
 
 playAgain.addEventListener('click', function () {
     location.reload();
 })
+
+function gameStartFun() {
+    if (clicked == false) {
+        gameStart.style.display = "flex";
+        gameStartImage.style.display = "block";
+        startGameBtn.style.display = "block";
+    }
+    else {
+        gameStart.style.display = "none";
+        gameStartImage.style.display = "none";
+        startGameBtn.style.display = "none";
+        loop();
+    }
+}
 
 function gameWonFun() {
     gameOver.style.display = "flex";
@@ -224,6 +248,7 @@ function gameWonFun() {
     canvas.style.display="none"
 
 }
+
 function gameLostFun() {
     gameOver.style.backgroundColor = "rgba(0, 0, 0, .5)"
     gameOver.style.display = "flex";
@@ -310,4 +335,4 @@ if(!game){
 }
 }   
 initBrick()
-loop()
+gameStartFun();
