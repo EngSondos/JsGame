@@ -74,9 +74,10 @@ function losingLives() {
     if(ball.x > paddle.x && ball.x < paddle.x + paddle_Width)
     {
         ball.dy =-ball.dy
+        Paddle_Hit.play();
     } else {
         lives--;
-       
+       Losing.play();
         if (!lives){
             game=true
             gameLostFun()
@@ -90,9 +91,12 @@ function clashWall() {
 
     if(ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0){
         ball.dx = - ball.dx;
+        Wall_Hit.play();
     }
+    
     if(ball.y - ball.radius < 0){
         ball.dy = - ball.dy;
+        Wall_Hit.play();
     }
     else if(ball.y + ball.dy +paddle_height> canvas.height-ball.radius) {  
         losingLives()
@@ -157,6 +161,7 @@ for (var r = 0; r < brickRowCount; r++) {
     bricks[r] = [];
     for (var c = 0; c < brickColumnCount; c++) {
         bricks[r][c] = { x: 0, y: 0, status: 1, hitCount: 0 };
+        // Brick_Hit.play();
     }
 }
 }
@@ -246,6 +251,7 @@ function gameWonFun() {
     youWon.style.display = "block";
     playAgain.style.display = "block"
     canvas.style.display="none"
+    
 
 }
 
@@ -255,6 +261,7 @@ function gameLostFun() {
     youLost.style.display = "block";
     playAgain.style.display = "block"
     canvas.style.display="none"
+   
 
 
 }
@@ -269,14 +276,18 @@ function collisionDetection() {
                     ball.dy = -ball.dy;
                     b.hitCount++;
                     score++;
+                    Brick_Hit.play();
 
                     if (b.hitCount == 2)
                         b.status = 0
 
                     if (score == 2 * brickRowCount * brickColumnCount) {
                         level++
+                         Winining.play();
                         if (level > MAX_LEVELS) {
+                           
                             gameWonFun()
+                            
                             game=true
                             
                         }else {
@@ -332,3 +343,30 @@ if(!game){
 }   
 initBrick()
 gameStartFun();
+
+const Wall_Hit= new Audio();
+Wall_Hit.src="sounds_wall.mp3";
+
+const Paddle_Hit= new Audio();
+Paddle_Hit.src="paddle_hit.mp3";
+
+const Brick_Hit =new Audio();
+Brick_Hit.src="brick_hit.mp3";
+
+const Winining= new Audio();
+Winining.src="sounds_win.mp3";
+
+const Losing= new Audio();
+Losing.src="life_lost.mp3";
+
+// const sound= document.getElementById("sound");
+// soundElement.addEventListener("click",audio);
+// function audio(){
+//     let imgsrc = soundElement.getAttribute("src");
+//     let SOUND_IMG = imgsrc ==
+// }
+// Wall_Hit.mute = Wall_Hit.mute ? false : true;
+// Paddle_Hit.mute = Paddle_Hit.mute ? false : true;
+// Brick_Hit.mute = Brick_Hit.mute ? false : true;
+// Winining.mute = Winining.mute ? false : true;
+// Losing.mute = Losing.mute ? false : true; 
