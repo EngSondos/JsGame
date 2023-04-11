@@ -13,7 +13,7 @@ let paddle = {
 };
 
 // creat the ball
-const BALL_RADIUS = 8;
+const BALL_RADIUS = 10;
 
 const ball = {
     x: canvas.width / 2,
@@ -25,13 +25,13 @@ const ball = {
 }
 const MAX_LEVELS = 3
 
-var brickRowCount = 2;
+var brickRowCount = 3;
 var brickColumnCount = 6;
-var brickWidth = 70;
-var brickHeight = 60
+var brickWidth = 60;
+var brickHeight = 40
 var brickPadding = 10;
-var brickOffsetTop = 50;
-var brickOffsetLeft = 30;
+var brickOffsetTop = 100;
+var brickOffsetLeft = 80;
 
 let gameStart = document.getElementById('game-interface');
 let gameStartImage = document.getElementById('gstart-img');
@@ -47,12 +47,13 @@ let game=false
 
 function drawball() {
     context.beginPath();
+    context.fillStyle = '#0770c1';
+
     context.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-    context.fillStyle = "black";
     context.fill();
 
-    context.strokeStyle = "blue";
-    context.stroke();
+    //context.strokeStyle = "blue";
+    //context.stroke();
     context.closePath();
 }
 //move the ball
@@ -105,11 +106,12 @@ function clashWall() {
 // Draw Paddle
 function drawpaddle() {
     context.beginPath
-    context.fillStyle = '#5900b3';
+    context.fillStyle = '#0770c1';
     context.rect(paddle.x, paddle.y, paddle.w, paddle.h);
 
-    context.strokeStyle = '#b30000';
-    context.strokeRect(paddle.x, paddle.y, paddle.w, paddle.h);
+    //context.strokeStyle = '#0770c1';
+    //context.strokeRect(paddle.x, paddle.y, paddle.w, paddle.h);
+    context.fill();
     context.closePath;
 }
 
@@ -169,15 +171,13 @@ function drawBricks() {
                 bricks[r][c].x = brickX;
                 bricks[r][c].y = brickY;
                 context.beginPath();
-                context.drawImage(imgb, brickX, brickY, brickWidth, brickHeight)
 
-                if (bricks[r][c].hitCount == 0) {
-                    context.drawImage(imgb, brickX, brickY, brickWidth, brickHeight)
-
-
-                } else if (bricks[r][c].hitCount == 1) {
-                    context.drawImage(imgb2, brickX, brickY, brickWidth, brickHeight)
-
+                   context.rect(brickX, brickY, brickWidth, brickHeight);
+                    context.fillStyle = "#7e0a44";
+           
+                 if (bricks[r][c].hitCount == 1) {
+                    context.rect(brickX, brickY, brickWidth, brickHeight);
+                    context.fillStyle = "#0770c1";
 
                 }
                 context.fill();
@@ -191,10 +191,10 @@ function drawBricks() {
 
 function drawScore() {
     context.font = "18px Lilita One";
-    context.fillStyle = "#000000";
+    context.fillStyle = "#FFFFFF";
 
-    context.drawImage(img, 27, 5, 20, 20);
-    context.fillText("Score: " + score, 53, 20);
+    context.drawImage(img, 27, 10, 25, 25);
+    context.fillText("Score: " + score, 57, 27);
 
 }
 
@@ -202,19 +202,19 @@ function drawScore() {
 function drawLives() {
 
     context.font = "18px Lilita One ";
-    context.fillStyle = "#000000";
-    context.drawImage(img2, canvas.width - 120, 5, 20, 20);
+    context.fillStyle = "#FFFFFF";
+    context.drawImage(img2, canvas.width - 130, 10, 25, 25);
 
-    context.fillText("Lives: " + lives, canvas.width - 90, 20);
+    context.fillText("Lives: " + lives, canvas.width - 98, 27);
 }
 
 function drawLevel() {
 
     context.font = "18px Lilita One ";
-    context.fillStyle = "#000";
-    context.drawImage(img3, canvas.width - 260, 5, 20, 20);
+    context.fillStyle = "#FFFFFF";
+    context.drawImage(img3, canvas.width - 340, 10, 25, 25);
 
-    context.fillText(level, canvas.width - 230, 20);
+    context.fillText(level, canvas.width - 300, 29);
 }
 let clicked = false;
 
@@ -304,16 +304,12 @@ canvas.style.border = "1px solid black"
 
 
 var img = new Image();
-img.src = 'icons8-christmas-star-100.png';
+img.src = 'S3D.png';
 var img2 = new Image();
-img2.src = "heart.png";
+img2.src = "H3D.png";
 var img3 = new Image();
-img3.src = "level.png";
+img3.src = "positive-dynamic-100.png";
 
-var imgb = new Image();
-imgb.src = "b1.PNG";
-var imgb2 = new Image();
-imgb2.src = "b2.PNG"
 
 
 function loop() {

@@ -1,12 +1,27 @@
+
+body{
+
+    background-image: url(imgs/background\ .png);
+   
+}
+
 .positioning-and-dimensions {
     width: 70%;
-    height: 50vh;
-    margin: 2% 15%;
+    height: 70vh;
+    margin: 5% 15%;
     position: absolute;
 }
 
+p{
+
+    padding-top: 90px;
+}
+
 canvas {
-    outline: 1px solid saddlebrown;
+
+    background-color: rgba(0,0,0,.8);
+    color: #fff;
+    outline: 1px solid rgb(194, 31, 112);
     display: block;
    
 }
@@ -16,7 +31,7 @@ canvas {
 #gameover {
     justify-content: center;
     align-items: center;
-    background-color: rgba(31, 148, 31, .5);
+    background-color:  rgba(83, 55, 69, 0.8);
     display: none;
 
 }
