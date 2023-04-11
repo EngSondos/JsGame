@@ -1,6 +1,7 @@
 let canvas = document.getElementsByTagName('canvas')[0]
 let context = canvas.getContext('2d')
 
+// create paddle //
 const paddle_Width = 100;
 const paddle_height = 15;
 const paddle_Margin_Bottom = 10;
@@ -104,7 +105,6 @@ function clashWall() {
 }
 
 
-// create paddle //
 
 
 // Draw Paddle
@@ -154,6 +154,22 @@ function movePaddle() {
         paddle.x -= paddle.dx
     }
 }
+
+
+     // control with Mouse
+     document.addEventListener('mousemove',function(e){
+        // mouse position //
+        let relativeX = e.clientX - canvas.offsetLeft ;  
+        // if mouse inside canvas
+        if( 
+            relativeX > paddle_Width / 2 &&
+            relativeX + paddle_Width / 2 < canvas.width
+        ){
+            paddle.x = relativeX -paddle_Width /2 ;
+        }
+       
+    }) ;
+
 
 var bricks = [];
 function initBrick(){
