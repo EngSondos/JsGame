@@ -5,8 +5,7 @@ let context = canvas.getContext('2d')
     const paddle_Width = 150;
     const paddle_height =20;
     const paddle_Margin_Bottom = 30;
-    var paddleX = (canvas.width-paddle_Width)/2;
-    let paddle ={
+    const paddle ={
         x : canvas.width/2 - paddle_Width/2, // middle of canvas 
         y : canvas.height - paddle_height - paddle_Margin_Bottom,
         w : paddle_Width,
@@ -54,7 +53,16 @@ let context = canvas.getContext('2d')
      }
     );
 
-
+  function movePaddle() {
+        // for paddle move inside canvas 
+        if (rightArrow && paddle.x + paddle_Width < canvas.width) {
+            paddle.x += paddle.dx
+        // don't move outside the canvas
+        } else if(leftArrow && paddle.x > 0 ){
+            paddle.x -= paddle.dx
+        }
+    }
+    
   
    // control with Mouse
     document.addEventListener('mousemove',function(e){
@@ -70,16 +78,7 @@ let context = canvas.getContext('2d')
        
     }) ;
      
-    function movePaddle() {
-        // for paddle move inside canvas 
-        if (rightArrow && paddle.x + paddle_Width < canvas.width) {
-            paddle.x += paddle.dx
-        // don't move outside the canvas
-        } else if(leftArrow && paddle.x > 0 ){
-            paddle.x -= paddle.dx
-        }
-    }
-    
+  
     function loop(){
 
         context.clearRect(0, 0, canvas.width, canvas.height);
