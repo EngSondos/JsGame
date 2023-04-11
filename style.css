@@ -45,3 +45,10 @@ canvas {
     z-index: 2;
     display: none;
 }
+#sound{
+width:30px;
+height: 30px;
+top: 280px;
+left: 210px;
+position: absolute;
+}
